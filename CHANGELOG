@@ -1,0 +1,14 @@
+# Change log
+
+## v.1.0.0 - Jan, 24, 2020
+
+Initial Realease
+
+** Added:**
+- Dockerfile
+- Change log
+- Readme
+- Archives config
+- Nginx 1.17.8
+- PHP-FPM 7.4
+- HTML Welcome Nginx
