@@ -2,8 +2,6 @@
 
 [![N|Solid](https://linuxsolutions.xyz/linuxSolution.jpeg)](https://linuxsolutions.xyz)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 Image ready to build your web server with Nginx and PHP-FPM.
 
 Current versions composed in this image;

@@ -1,10 +1,11 @@
-# Change log
+# Changelog
+All notable changes to this project will be documented in this file.
 
-## v.1.0.0 - Jan, 24, 2020
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-Initial Realease
-
-** Added:**
+## [1.0.0] - Jan, 24, 2020
+### Added
 - Dockerfile
 - Change log
 - Readme
@@ -12,3 +13,13 @@ Initial Realease
 - Nginx 1.17.8
 - PHP-FPM 7.4
 - HTML Welcome Nginx
+
+## [1.0.1] - Jan, 24, 2020
+### Added
+- Dockerfile Label Version and Company
+
+### Fixed
+- Adapting a writing pattern in the CHANGELOG.
+
+### Remove
+- Buld Status in READNE.md

@@ -2,6 +2,10 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan.gouveia@apiki.com"
 
+LABEL version="1.0.1"
+
+LABEL company="Linux Solutions."
+
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 ENV NGINX_VERSION 1.17.7-1~buster
