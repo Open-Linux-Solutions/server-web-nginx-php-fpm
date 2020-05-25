@@ -1,6 +1,6 @@
 FROM debian:buster
 
-LABEL maintainer="Jônatan Gouveia jonatan.gouveia@apiki.com"
+LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
 LABEL version="1.0.1"
 
