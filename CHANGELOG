@@ -23,3 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Remove
 - Buld Status in READNE.md
+
+## [1.0.2] - May, 29, 2020
+### Added
+- Support user and group www-data
