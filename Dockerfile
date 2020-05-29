@@ -121,7 +121,10 @@ ADD ./config/default.conf /etc/nginx/conf.d/default.conf
 ADD ./config/nginx.conf /etc/nginx/nginx.conf
 
 # Override default nginx welcome page
-COPY ./config/html /usr/share/nginx/html
+COPY ./config/html /var/www/html
+
+#Fixer User And Group
+RUN chown -R www-data:www-data /var/www/
 
 # Add Scripts
 ADD ./config/start.sh /start.sh
