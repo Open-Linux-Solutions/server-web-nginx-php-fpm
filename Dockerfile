@@ -2,7 +2,7 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
-LABEL version="1.0.4"
+LABEL version="1.0.5"
 
 LABEL company="Linux Solutions."
 
