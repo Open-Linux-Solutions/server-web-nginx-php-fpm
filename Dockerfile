@@ -119,7 +119,7 @@ ADD ./config/supervisord.conf /etc/supervisord.conf
 ADD ./config/default.conf /etc/nginx/conf.d/default.conf
 
 # Adding Support ACL
-ADD ./confi/acl.conf /etc/nginx/common/acl.conf
+ADD ./config/acl.conf /etc/nginx/common/acl.conf
 ADD ./config/htpasswd /etc/nginx/htpasswd
 
 # Nginx - Customized configurations, other sites and possibilities to add and enable modules.
