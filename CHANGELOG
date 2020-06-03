@@ -27,3 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.2] - May, 29, 2020
 ### Added
 - Support user and group www-data
+
+## [1.0.2] - Jun, 03, 2020
+### Update
+- Versions Nginx and Composer
+### Fixed
+- Support a User www-data in /var/www/

@@ -5,9 +5,9 @@
 Image ready to build your web server with Nginx and PHP-FPM.
 
 Current versions composed in this image;
-  - [Nginx](http://nginx.org/en/download.html) 1.17.8
-  - [PHP-FPM](https://www.php.net/manual/en/install.fpm.php) 7.4
-  - [Composer](https://getcomposer.org/doc/00-intro.md) 1.9.1
+  - [Nginx](http://nginx.org/en/download.html) 1.19.0
+  - [PHP-FPM](https://www.php.net/manual/en/install.fpm.php) 7.4.6
+  - [Composer](https://getcomposer.org/doc/00-intro.md) 1.10.7
   - [WP-CLI](https://developer.wordpress.org/cli/commands/)
 
 # Features!
@@ -19,7 +19,7 @@ Current versions composed in this image;
 * Default Nginx Welcome Directory:
 
 ```sh
-$ /usr/share/nginx/html
+$ /var/www/html
 ```
 
 * Default Nginx configuration:
@@ -57,7 +57,7 @@ $ docker run --name my-server -d -p 8080:80 linuxsolutions/server-web-nginx-php-
 * Referencing your project:
 
 ```sh
-$ docker run --name my-server -d -p 8080:80 -v /var/www/project:/usr/share/nginx/html linuxsolutions/server-web-nginx-php-fpm
+$ docker run --name my-server -d -p 8080:80 -v /var/www/project:/var/www/html linuxsolutions/server-web-nginx-php-fpm
 ```
 
 * Docker Compose:
@@ -73,7 +73,7 @@ services:
     restart: always
     volumes:
       - ./custom-site.conf:/etc/nginx/conf.d/default.conf #Example below
-      - /path/your-project/:/var/www/
+      - /path/your-project/:/var/www/html
     ports:
       - '80:80'
       - '443:443'
@@ -100,7 +100,7 @@ server {
     listen   80; ## listen for ipv4; this line is default and implied
     listen   [::]:80 default ipv6only=on; ## listen for ipv6
 
-    root /usr/share/nginx/html;
+    root /var/www/html;
     index index.php index.html index.htm;
 
     # Make site accessible from http://localhost/
@@ -175,7 +175,7 @@ services:
     restart: always
     volumes:
       - ./custom-site.conf:/etc/nginx/conf.d/default.conf #Example below
-      - /path/your-project/:/var/www/
+      - /path/your-project/:/var/www/html
     ports:
       - '80:80'
       - '443:443'

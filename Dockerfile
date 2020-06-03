@@ -2,16 +2,16 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 LABEL company="Linux Solutions."
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
-ENV NGINX_VERSION 1.17.7-1~buster
+ENV NGINX_VERSION 1.19.0-1~buster
 ENV php_conf /etc/php/7.4/fpm/php.ini
 ENV fpm_conf /etc/php/7.4/fpm/pool.d/www.conf
-ENV COMPOSER_VERSION 1.9.1
+ENV COMPOSER_VERSION 1.10.7
 
 # Install Basic Requirements
 RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
