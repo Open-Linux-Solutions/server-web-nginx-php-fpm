@@ -12,6 +12,7 @@ ENV NGINX_VERSION 1.19.0-1~buster
 ENV php_conf /etc/php/7.4/fpm/php.ini
 ENV fpm_conf /etc/php/7.4/fpm/pool.d/www.conf
 ENV COMPOSER_VERSION 1.10.7
+ENV NGINX_REDIS_MODULE 0.3.8
 
 # Install Basic Requirements
 RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
@@ -37,7 +38,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -q -y \
             apt-utils \
-            nano \
+            vim \
             zip \
             unzip \
             python-pip \
@@ -73,7 +74,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} \
     && sed -i -e "s/memory_limit\s*=\s*.*/memory_limit = 256M/g" ${php_conf} \
-    && sed -i -e "s/upload_max_filesize\s*=\s*64M/upload_max_filesize = 100M/g" ${php_conf} \
+    && sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 200M/g" ${php_conf} \
     && sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} \
     && sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} \
     && sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.4/fpm/php-fpm.conf \
@@ -83,7 +84,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" ${fpm_conf} \
     && sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" ${fpm_conf} \
     && sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" ${fpm_conf} \
-    && sed -i -e "s/www-data/nginx/g" ${fpm_conf} \
+    && sed -i -e "s/nginx/www-data/g" ${fpm_conf} \
     && sed -i -e "s/^;clear_env = no$/clear_env = no/" ${fpm_conf} \
     && echo "extension=redis.so" > /etc/php/7.4/mods-available/redis.ini \
     && echo "extension=memcached.so" > /etc/php/7.4/mods-available/memcached.ini \
@@ -123,8 +124,10 @@ ADD ./config/nginx.conf /etc/nginx/nginx.conf
 # Override default nginx welcome page
 COPY ./config/html /var/www/html
 
-#Fixer User And Group
-RUN chown -R www-data:www-data /var/www/
+#User www-data
+RUN deluser www-data
+RUN echo "www-data:x:33:33:LinuxSolutions,,,:/var/www:/bin/false" >> /etc/passwd && echo "www-data:x:33:www-data" >> /etc/group
+RUN usermod -aG nginx www-data
 
 # Add Scripts
 ADD ./config/start.sh /start.sh
