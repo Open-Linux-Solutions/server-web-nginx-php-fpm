@@ -2,7 +2,7 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
-LABEL version="1.0.2"
+LABEL version="1.0.3"
 
 LABEL company="Linux Solutions."
 
@@ -117,6 +117,10 @@ ADD ./config/supervisord.conf /etc/supervisord.conf
 
 # Override nginx's default config
 ADD ./config/default.conf /etc/nginx/conf.d/default.conf
+
+# Adding Support ACL
+ADD ./confi/acl.conf /etc/nginx/common/acl.conf
+ADD ./config/htpasswd /etc/nginx/htpasswd
 
 # Nginx - Customized configurations, other sites and possibilities to add and enable modules.
 ADD ./config/nginx.conf /etc/nginx/nginx.conf

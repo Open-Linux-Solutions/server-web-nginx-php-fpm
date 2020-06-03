@@ -42,6 +42,20 @@ $ include /etc/nginx/sites-enabled/*.conf;
 $ include /etc/nginx/upstream/*.conf;
 ```
 
+* Support ACL HTTP authentication
+
+```sh
+$ include common/acl.conf;
+```
+
+The configuration file is located in /etc/nginx/htpasswd
+You can generate credentials on this website: https://www.web2generators.com/apache-tools/htpasswd-generator
+To the credentials defined by default:
+
+```sh
+# htpasswd: linuxsolutions | create-your-password
+```
+
 * Example to run the server.
 
 ```sh
