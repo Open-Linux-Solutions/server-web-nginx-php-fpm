@@ -2,7 +2,7 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
-LABEL version="1.0.5"
+LABEL version="1.0.6"
 
 LABEL company="Linux Solutions."
 
@@ -44,6 +44,12 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             python-pip \
             python-setuptools \
             git \
+            gcc \
+            make \
+            autoconf \
+            libc-dev \
+            pkg-config \
+            libmcrypt-dev \
             libmemcached-dev \
             libmemcached11 \
             libmagickwand-dev \
@@ -65,8 +71,9 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             php7.4-pgsql \
             php7.4-intl \
             php7.4-xml \
+            php-gmp \
             php-pear \
-    && pecl -d php_suffix=7.4 install -o -f redis memcached imagick \
+    && pecl -d php_suffix=7.4 install -o -f redis memcached imagick mcrypt-1.0.3 \
     && mkdir -p /run/php \
     && pip install wheel \
     && pip install supervisor supervisor-stdout \
@@ -89,12 +96,18 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && echo "extension=redis.so" > /etc/php/7.4/mods-available/redis.ini \
     && echo "extension=memcached.so" > /etc/php/7.4/mods-available/memcached.ini \
     && echo "extension=imagick.so" > /etc/php/7.4/mods-available/imagick.ini \
+    && echo "extension=mcrypt.so" > /etc/php/7.4/mods-available/mcrypt.ini \
+    && echo "extension=php_gmp.so" > /etc/php/7.4/mods-available/gmp.ini \
     && ln -sf /etc/php/7.4/mods-available/redis.ini /etc/php/7.4/fpm/conf.d/20-redis.ini \
     && ln -sf /etc/php/7.4/mods-available/redis.ini /etc/php/7.4/cli/conf.d/20-redis.ini \
     && ln -sf /etc/php/7.4/mods-available/memcached.ini /etc/php/7.4/fpm/conf.d/20-memcached.ini \
     && ln -sf /etc/php/7.4/mods-available/memcached.ini /etc/php/7.4/cli/conf.d/20-memcached.ini \
     && ln -sf /etc/php/7.4/mods-available/imagick.ini /etc/php/7.4/fpm/conf.d/20-imagick.ini \
-    && ln -sf /etc/php/7.4/mods-available/imagick.ini /etc/php/7.4/cli/conf.d/20-imagick.ini
+    && ln -sf /etc/php/7.4/mods-available/imagick.ini /etc/php/7.4/cli/conf.d/20-imagick.ini \
+    && ln -sf /etc/php/7.4/mods-available/mcrypt.ini /etc/php/7.4/fpm/conf.d/20-mcrypt.ini \
+    && ln -sf /etc/php/7.4/mods-available/mcrypt.ini /etc/php/7.4/cli/conf.d/20-mcrypt.ini \
+    && ln -sf /etc/php/7.4/mods-available/gmp.ini > /etc/php/7.4/fpm/conf.d/20-gmp.ini \
+    && ln -sf /etc/php/7.4/mods-available/gmp.ini > /etc/php/7.4/cli/conf.d/20-gmp.ini
 
 # Install Composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
