@@ -2,7 +2,7 @@ FROM debian:buster
 
 LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
 
-LABEL version="1.0.6"
+LABEL version="1.0.7"
 
 LABEL company="Linux Solutions."
 
@@ -71,6 +71,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             php7.4-pgsql \
             php7.4-intl \
             php7.4-xml \
+            php7.4-sqlite3 \
             php-gmp \
             php-pear \
     && pecl -d php_suffix=7.4 install -o -f redis memcached imagick mcrypt-1.0.3 \

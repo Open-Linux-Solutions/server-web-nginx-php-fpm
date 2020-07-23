@@ -14,6 +14,10 @@ Current versions composed in this image;
 
 > Image based on Debian Buster.
 
+## With WordPress support
+
+* Meets the required requirements! [WordPress](https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
+
 ### What do you need to know!
 
 * Default Nginx Welcome Directory:
@@ -211,8 +215,6 @@ services:
       - MYSQL_DATABASE=example_db               
     ports:
       - '3306:3306'
-    depends_on:
-      - development
     networks: 
       dev:
         ipv4_address: 171.28.5.11

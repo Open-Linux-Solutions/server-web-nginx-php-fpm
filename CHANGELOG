@@ -42,3 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.6] - Jul, 02, 2020
 ### Added
 - Adding modules mcrypt and gmp
+## [1.0.7] - Jul, 23, 2020
+### Added
+- Added to required WordPress extensions
