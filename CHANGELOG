@@ -45,3 +45,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.7] - Jul, 23, 2020
 ### Added
 - Added to required WordPress extensions
+## [1.0.8] - May, 12, 2021
+### Update
+- Upgrade version PHP and Composer
+- Clean packages install
+- Change from image debian
+- Update READNE
