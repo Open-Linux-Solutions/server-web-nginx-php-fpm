@@ -6,13 +6,13 @@ Image ready to build your web server with Nginx and PHP-FPM.
 
 Current versions composed in this image;
   - [Nginx](http://nginx.org/en/download.html) 1.19.0
-  - [PHP-FPM](https://www.php.net/manual/en/install.fpm.php) 7.4.6
-  - [Composer](https://getcomposer.org/doc/00-intro.md) 1.10.7
+  - [PHP-FPM](https://www.php.net/manual/en/install.fpm.php) 7.4.18
+  - [Composer](https://getcomposer.org/doc/00-intro.md) 2.0.13
   - [WP-CLI](https://developer.wordpress.org/cli/commands/)
 
 # Features!
 
-> Image based on Debian Buster.
+> Image based on Debian Buster Slim.
 
 ## With WordPress support
 
@@ -46,24 +46,12 @@ $ include /etc/nginx/sites-enabled/*.conf;
 $ include /etc/nginx/upstream/*.conf;
 ```
 
-* Support ACL HTTP authentication
-
-```sh
-$ include common/acl.conf;
-```
-
-The configuration file is located in /etc/nginx/htpasswd
-You can generate credentials on this website: https://www.web2generators.com/apache-tools/htpasswd-generator
-To the credentials defined by default:
-
-```sh
-# htpasswd: linuxsolutions | create-your-password
-```
+---
 
 * Example to run the server.
 
 ```sh
-$ docker run --name my-server -d -p 8080:80 linuxsolutions/server-web-nginx-php-fpm
+$ docker run --name my-server -d -p 8080:80 fuerzastudio/nginx-php-fpm
 ```
 
 * In the Browser:
@@ -75,7 +63,7 @@ $ docker run --name my-server -d -p 8080:80 linuxsolutions/server-web-nginx-php-
 * Referencing your project:
 
 ```sh
-$ docker run --name my-server -d -p 8080:80 -v /var/www/project:/var/www/html linuxsolutions/server-web-nginx-php-fpm
+$ docker run --name my-server -d -p 8080:80 -v /var/www/project:/var/www/html fuerzastudio/nginx-php-fpm
 ```
 
 * Docker Compose:
@@ -86,8 +74,8 @@ version: '3'
 services:
   
   server-web:
-    image: linuxsolutions/server-web-nginx-php-fpm
-    container_name: nginx-php-fpm 
+    image: fuerzastudio/nginx-php-fpm
+    container_name: webserver 
     restart: always
     volumes:
       - ./custom-site.conf:/etc/nginx/conf.d/default.conf #Example below
@@ -188,7 +176,7 @@ version: '3'
 services:
   
   server-web:
-    image: linuxsolutions/server-web-nginx-php-fpm
+    image: fuerzastudio/nginx-php-fpm
     container_name: nginx-php-fpm 
     restart: always
     volumes:
