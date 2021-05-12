@@ -1,17 +1,17 @@
-FROM debian:buster
+FROM debian:buster-slim
 
-LABEL maintainer="Jônatan Gouveia jonatan@linuxsolutions.xyz"
+LABEL maintainer="Jônatan Gouveia jonatan@fuerzastudio.com.br"
 
 LABEL version="1.0.7"
 
-LABEL company="Linux Solutions."
+LABEL company="Fuerza Studio"
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 ENV NGINX_VERSION 1.19.0-1~buster
 ENV php_conf /etc/php/7.4/fpm/php.ini
 ENV fpm_conf /etc/php/7.4/fpm/pool.d/www.conf
-ENV COMPOSER_VERSION 1.10.7
+ENV COMPOSER_VERSION 2.0.13
 ENV NGINX_REDIS_MODULE 0.3.8
 
 # Install Basic Requirements
@@ -38,12 +38,8 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -q -y \
             apt-utils \
-            vim \
-            zip \
-            unzip \
             python-pip \
             python-setuptools \
-            git \
             gcc \
             make \
             autoconf \
@@ -53,7 +49,6 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             libmemcached-dev \
             libmemcached11 \
             libmagickwand-dev \
-            mariadb-client \
             nginx=${NGINX_VERSION} \
             php7.4-fpm \
             php7.4-cli \
@@ -132,10 +127,6 @@ ADD ./config/supervisord.conf /etc/supervisord.conf
 # Override nginx's default config
 ADD ./config/default.conf /etc/nginx/conf.d/default.conf
 
-# Adding Support ACL
-ADD ./config/acl.conf /etc/nginx/common/acl.conf
-ADD ./config/htpasswd /etc/nginx/htpasswd
-
 # Nginx - Customized configurations, other sites and possibilities to add and enable modules.
 ADD ./config/nginx.conf /etc/nginx/nginx.conf
 
@@ -144,7 +135,7 @@ COPY ./config/html /var/www/html
 
 #User www-data
 RUN deluser www-data
-RUN echo "www-data:x:33:33:LinuxSolutions,,,:/var/www:/bin/false" >> /etc/passwd && echo "www-data:x:33:www-data" >> /etc/group
+RUN echo "www-data:x:33:33:FuerzaStudio,,,:/var/www:/bin/false" >> /etc/passwd && echo "www-data:x:33:www-data" >> /etc/group
 RUN usermod -aG nginx www-data
 
 # Add Scripts
